@@ -86,7 +86,10 @@ router.post("/avatar", authenticateToken, async (req: AuthRequest, res) => {
     // Update user avatar in database
     const updatedUser = await prisma.user.update({
       where: { user_id: userId },
-      data: { avatar_url: avatarUrl },
+      data: { 
+        avatar_url: avatarUrl,
+        updated_at: new Date()
+      },
       select: {
         user_id: true,
         email: true,
@@ -96,6 +99,8 @@ router.post("/avatar", authenticateToken, async (req: AuthRequest, res) => {
         birth_date: true,
         ai_requests_count: true,
         created_at: true,
+        email_verified: true,
+        is_questionnaire_completed: true,
       },
     });
 

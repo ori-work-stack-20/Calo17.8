@@ -23,15 +23,27 @@ model User {
   ai_requests_count          Int                   @default(0)
   ai_requests_reset_at       DateTime              @default(now())
   is_questionnaire_completed Boolean               @default(false)
-  questionnaires             UserQuestionnaire[]
-  meals                      Meal[]
-  nutritionPlans             NutritionPlan[]
-  payments                   SubscriptionPayment[]
   email_verified             Boolean               @default(false)
   email_verification_code    String?
   email_verification_expires DateTime?
   password_reset_code        String?
   password_reset_expires     DateTime?
+  level                      Int?                  @default(1)
+  total_points               Int?                  @default(0)
+  current_xp                 Int?                  @default(0)
+  current_streak             Int?                  @default(0)
+  best_streak                Int?                  @default(0)
+  total_complete_days        Int?                  @default(0)
+  last_complete_date         DateTime?
+  active_meal_plan_id        String?
+  active_menu_id             String?
+  created_at                 DateTime              @default(now())
+  updated_at                 DateTime              @updatedAt
+
+  questionnaires             UserQuestionnaire[]
+  meals                      Meal[]
+  nutritionPlans             NutritionPlan[]
+  payments                   SubscriptionPayment[]
 
   connectedDevices  ConnectedDevice[]
   activitySummaries DailyActivitySummary[]
@@ -49,15 +61,6 @@ model User {
   // Food scanner relationship
   foodProducts FoodProduct[]
 
-  level               Int?      @default(1)
-  total_points        Int?      @default(0)
-  current_xp          Int?      @default(0)
-  current_streak      Int?      @default(0)
-  best_streak         Int?      @default(0)
-  total_complete_days Int?      @default(0)
-  last_complete_date  DateTime?
-
-  created_at DateTime @default(now())
 
   Session Session[]
 
@@ -66,8 +69,6 @@ model User {
   dailyGoals   DailyGoal[]
   WaterIntake  WaterIntake[]
 
-  active_meal_plan_id String?
-  active_menu_id      String?
 }
 
 model Session {
