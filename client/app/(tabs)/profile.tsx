@@ -430,7 +430,7 @@ export default function ProfileScreen() {
               <Image
                 source={{
                   uri:
-                    // user?.avatar ||
+                    user?.avatar_url ||
                     "https://via.placeholder.com/80x80/FFFFFF/16A085?text=U",
                 }}
                 style={styles.avatarImage}
